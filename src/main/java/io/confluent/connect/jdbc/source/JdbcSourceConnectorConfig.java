@@ -83,6 +83,10 @@ public class JdbcSourceConnectorConfig extends AbstractConfig {
   public static final int BATCH_MAX_ROWS_DEFAULT = 100;
   private static final String BATCH_MAX_ROWS_DISPLAY = "Max Rows Per Batch";
 
+  public static final String FETCH_SIZE_CONFIG = "fetch.size";
+  public static final int FETCH_SIZE_DEFAULT = 100;
+  private static final String FETCH_SIZE_CONFIG_DOC = "Number of records to fetch when getting results based on cursor";
+
   public static final String NUMERIC_PRECISION_MAPPING_CONFIG = "numeric.precision.mapping";
   private static final String NUMERIC_PRECISION_MAPPING_DOC =
           "Whether or not to attempt mapping NUMERIC values by precision to integral types";
@@ -451,7 +455,13 @@ public class JdbcSourceConnectorConfig extends AbstractConfig {
         CONNECTOR_GROUP,
         5,
         Width.MEDIUM,
-        TIMESTAMP_DELAY_INTERVAL_MS_DISPLAY);
+        TIMESTAMP_DELAY_INTERVAL_MS_DISPLAY
+    ).define(
+        FETCH_SIZE_CONFIG,
+        Type.INT,
+        FETCH_SIZE_DEFAULT,
+        Importance.MEDIUM,
+        FETCH_SIZE_CONFIG_DOC);
   }
 
   public static final ConfigDef CONFIG_DEF = baseConfigDef();
